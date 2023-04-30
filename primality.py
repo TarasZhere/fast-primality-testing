@@ -5,39 +5,34 @@ from random import randint
 from math import gcd, sqrt
 
 
-def isPrime(primeNum, k=128):
+def isPrime(p, k=128):
     '''
-    Returns true or false
-        if false the number is for sure not prime
-        if true it may be prime
+        if p is a prime number and 
+        a is not a multiple of p [therefore gcd(p,a) = 1]
+        then a^(p-1) = 1 (mod p)
     '''
     # testing for the most simple cases like: odd numbers
-    if primeNum <= 3:
+    if p <= 3:
         return True
     
     # if even
-    if primeNum % 2 == 0:
+    if p % 2 == 0:
         return False
     
-    limit = int(sqrt(primeNum-1))
 
-    if primeNum < 128:
-        k = limit
+    if p < k:
+        k = p-1
+    
+    # testing for k times
+    a = set([randint(2, p - 1) for _ in range(k)]) # we do not need to test the same number twice. With set we eliminate the duplicates
 
-    for _ in range(k):
-        '''
-            a can be any number but for performance is crucial to select the sqrt(p),
-            since NO gcd of primeNumber (if any) is greater than sqrt(p)
-        '''
-        a = randint(2, limit)
-        
-        if gcd(primeNum % a, a) == 1: # gcd(primeNum, a) == gcd(primeNum % a, a)
-            modulo = pow(base=a, exp=primeNum-1, mod=primeNum)
-            if modulo == 1: continue
-            else:
-                return False
-        else: 
-            return False
+    tests = set(map(lambda a: pow(base=a, exp=p-1, mod=p), a))
+
+    if len(tests) > 1: 
+        return False
+    
     return True
+
+    
 
 
