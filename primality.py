@@ -30,7 +30,6 @@ def isPrime(p, k=128):
 
     if len(tests) > 1: 
         return False
-    
     return True
 
     
