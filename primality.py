@@ -2,8 +2,6 @@
 #   Student Taras Zherebetskyy
 #   
 from random import randint
-from math import gcd, sqrt
-
 
 def isPrime(p, k=128):
     '''
