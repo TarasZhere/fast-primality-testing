@@ -19,10 +19,6 @@ def isPrime(p, k=128):
     if p % 2 == 0:
         return False
     
-
-    if p < k:
-        k = p-1
-    
     # testing for k times
     a = set([randint(2, p - 1) for _ in range(k)]) # we do not need to test the same number twice. With set we eliminate the duplicates
 
